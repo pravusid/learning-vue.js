@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>vue.js</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://unpkg.com/vue@2.4.2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app1">
+    <my-comp></my-comp>
+    <hr>
+    <my-comp></my-comp>
+  </div>
+
+  <div id="app2">
+    <my-comp></my-comp>
+    <hr>
+    <my-comp></my-comp>
+  </div>
+  
+  <script>
+    // var data = { status: 'Critical' };
+
+    var comp = {
+      data: function() {
+        return {
+          status: 'Critical'
+        };
+      },
+      template: '<p>Server Status: {{ status }} <button @click="changeStatus">Change</button></p>',
+      methods: {
+        changeStatus: function() {
+          this.status = 'Normal';
+        }
+      }
+    };
+    
+    new Vue({
+      el: '#app1',
+      components: {
+        'my-comp': comp
+      }
+    });
+
+    new Vue({
+      el: '#app2'
+    });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>vue.js</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/vue@2.4.2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <p>{{ title }} - <a v-bind:href="link">Google</a></p>
+      <p>{{ sayHello() }}</p>
+      <p v-html="finishedLink"></p>
+    </div>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          title: 'Hello World',
+          link: 'http://www.google.com',
+          finishedLink: '<a href="http://www.google.com">google</a>'
+        },
+        methods: {
+          sayHello: function() {
+            this.title = 'Hello!';
+            return this.title;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

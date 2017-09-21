@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>vue.js</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/vue@2.4.2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="changeLink">Click to change Link</button>
+      <button @click="changeLink">Click to change Link</button>
+      <a v-bind:href="link">Link</a>
+      <a :href="link">Link</a>
+    </div>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          link: 'http://www.google.com'
+        },
+        methods: {
+          changeLink: function() {
+            this.link = 'http://www.apple.com'
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

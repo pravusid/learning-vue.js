@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>vue.js</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/vue@2.4.2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" v-model="name">
+      <p>{{ name }}</p>
+    </div>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          name: 'Park'
+        }
+      });
+    </script>
+  </body>
+</html>

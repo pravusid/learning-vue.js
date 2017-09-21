@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>vue.js</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/vue@2.4.2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div class="demo" :class="{red: attachRed}" @click="attachRed = !attachRed"></div>
+      <div class="demo" :class="{red : attachRed, blue: !attachRed}"></div>
+      <div class="demo" :class="divClasses"></div>
+      <div class="demo" :class="[color, {red: attachRed}]"></div>
+      <hr>
+      <div class="demo" :style="{backgroundColor: color}"></div>
+      <div class="demo" :style="{backgroundColor: color}"></div>
+      <div class="demo" :style="[myStyle, {height: width + 'px'}]"></div>
+      <hr>
+      <input type="text" v-model="color">
+      <input type="text" v-model="width">
+    </div>
+
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          attachRed: false,
+          color: 'green',
+          width: 200
+        },
+        computed: {
+          divClasses: function() {
+            return {
+              red: this.attachRed,
+              blue: !this.attachRed
+            }
+          },
+          myStyle: function() {
+            return {
+              backgroundColor: this.color,
+              width: this.width + 'px'
+            };
+          }
+        }
+      });
+    </script>
+
+    <style>
+    .demo {
+      background-color: grey;
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+    }
+    .red {
+      background-color: red;
+    }
+    .blue {
+      background-color: blue;
+    }
+    .green {
+      background-color: green;
+    }
+    </style>
+  </body>
+</html>

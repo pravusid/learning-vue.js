@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>vue.js</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://unpkg.com/vue@2.4.2/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app1">
+    <h1 ref="heading">{{ title }}</h1>
+    <button v-on:click="show" ref="myButton">Show Paragraph</button>
+    <p v-if="showParagraph">This is not always visible</p>
+  </div>
+  <hr>
+  <div id="app2">
+    <h1>{{ title }}</h1>
+    <button @click="onChange">Change sth in Vue1</button>
+    <!-- 재사용을 위해서는 컴포넌트 사용 -->
+    <hello></hello>
+    <hello></hello>
+  </div>
+  <hr>
+  <div id="app3">
+
+  </div>
+
+  <script>
+    var data = {
+      title: 'The VueJS Instance',
+      showParagraph: false
+    };
+
+    Vue.component('Hello', {
+      template: '<h1>Hello!</h1>'
+    });
+
+    var vm1 = new Vue({
+      data: data,
+
+      methods: {
+        show: function () {
+          this.showParagraph = true;
+          this.updateTitle('The VueJS Instance (Updated)');
+          this.$refs.myButton.innerText = 'Test';
+        },
+        updateTitle: function (title) {
+          this.title = title;
+        }
+      },
+
+      computed: {
+        lowercaseTitle: function () {
+          return this.title.toLowerCase();
+        }
+      },
+
+      watch: {
+        title: function (value) {
+          alert('Title changed, new value: ' + value);
+        }
+      }
+    });
+
+    // vue el을 외부에서 설정할 수 있다
+    vm1.$mount('#app1');
+    // instance 내부 접근은 $로 할 수 있다.
+    console.log(vm1.$data === data);
+    // 외부에서도 $refs로 dom을 가져올 수 있다.
+    // vm1.$refs.heading.innerText = 'Sth Else';
+
+    // setTimeout(function() {
+    //   vm1.title = 'Changed by Timer';
+    //   vm1.show();
+    // }, 3000);
+
+    var vm2 = new Vue({
+      el: '#app2',
+      data: {
+        title: 'The second Instance'
+      },
+      methods: {
+        onChange: function() {
+          vm1.title = 'Changed!'
+        }
+      }
+    });
+
+    var vm3 = new Vue({
+      template: '<h1>Hello!</h1>'
+    });
+
+    vm3.$mount('#app3');
+    // document.getElementById('app3').appendChild(vm3.$el);
+  </script>
+</body>
+
+</html>

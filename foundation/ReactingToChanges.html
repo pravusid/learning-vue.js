@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>vue.js</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/vue@2.4.2/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <button v-on:click="counter++">Increase</button>
+      <button v-on:click="counter--">decrease</button>
+      <button v-on:click="secondCounter++">Increase Second</button>
+      <p>Counter: {{ counter }} | {{ secondCounter }}</p>
+      <p>Result: {{ result() }} | {{ output }}</p>
+    </div>
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          counter: 0,
+          secondCounter: 0
+        },
+        // computed를 사용하면 Methods와 다르게 변경된 데이터와 관련없는 함수가 호출되지 않는다.
+        computed: {
+          output: function() {
+            console.log('Computed');
+            return this.counter > 5 ? 'Greater 5' : 'Smaller than 5';
+          }
+        },
+        watch: {
+          // counter 값이 변화하면 작동, computed와 다르게 비동기로 작동가능, return 값이 없음
+          counter: function(value) {
+            var vm = this;
+            setTimeout(function() {
+              vm.counter = 0;
+            }, 2000);
+          }
+        },
+        methods: {
+          result: function() {
+            console.log('Methods');
+            return this.counter > 5 ? 'Greater 5' : 'Smaller than 5';
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
